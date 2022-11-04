@@ -65,11 +65,11 @@ if __name__ == "__main__":
 
 
 
-    TotEmployees += 1
-    TotHours += hours + TotHours
-    TotGrossPay += grosspay
-    TotTax += incometax
-    TotNetPay += netpay
+        TotEmployees += 1
+        TotHours += hours 
+        TotGrossPay += grosspay 
+        TotTax += incometax 
+        TotNetPay += netpay  
        
        # write the code to increment the other total variables with the appropriate values
   
