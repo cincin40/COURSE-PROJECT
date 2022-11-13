@@ -15,24 +15,32 @@ def GetDatesWorked():
     fromdate = datetime.strptime(startdate, '%m/%d/%y')
     enddate = str(input("Enter end date (mm/dd/yy): "))
     todate = datetime.strptime(enddate, '%m/%d/%y')
-    return GetDatesWorked
+    return fromdate, todate
+    
 
 
 
 def GetHoursWorked():
     hours = float(input('Enter amount of hours worked:  '))
     return hours
+
+
 def GetHourlyRate():
     hourlyrate = float(input ("Enter hourly rate: "))
     return hourlyrate
+
+
 def GetTaxRate():
     taxrate = float(input ("Enter tax rate: "))
     return taxrate
+
+
 def CalcTaxAndNetPay(hours, hourlyrate, taxrate):
     grosspay = hours * hourlyrate
     incometax = grosspay * taxrate
     netpay = grosspay - incometax
     return grosspay, incometax, netpay
+
 
 
 
@@ -45,9 +53,9 @@ def printinfo(EmpDetailList):
     # the following code creates a for loop to read through EmpDetailList and assign values in list to variables
     for EmpList in EmpDetailList:
         fromdate = EmpList[0]
-      
+        
         #write code to assign values to todate, empname, hours, hourlyrate, and taxrate from EmpLst
-
+        
 
 
         grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
@@ -95,21 +103,22 @@ if __name__ == "__main__":
         empname = GetEmpName()
         if (empname.upper() == "END"):
             break
-        fromdate, todate = GetDatesWorked()
-        hours = GetHoursWorked()
-        hourlyrate = GetHourlyRate()
-        taxrate = GetTaxRate()
+        else:
+            fromdate, todate = GetDatesWorked()
+            hours = GetHoursWorked()
+            hourlyrate = GetHourlyRate()
+            taxrate = GetTaxRate()
        
 
        
        #write code to insert fromdate, todate, empname, hours, hourlyrate, and taxrate into list EmpDetail
-    EmpDetail = []
-    EmpDetail.extend = [fromdate, todate, empname, hours, hourlyrate, taxrate]
+   
+        EmpDetail = [fromdate, todate, empname, hours, hourlyrate, taxrate]
 
         
         
         #the following code appends the list EmpDetail to the list EmpDetailList
-    EmpDetailList.append(EmpDetail)
+        EmpDetailList.append(EmpDetail)
 
      
     printinfo(EmpDetailList)
