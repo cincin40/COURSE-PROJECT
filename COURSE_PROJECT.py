@@ -1,9 +1,6 @@
-
-#   Cynthia Daniels
+#  Cynthia Daniels
 #   CIS261
 #   Project Phase 2
-from datetime import datetime
-# 
 def GetEmpName():
     empname = input("Enter employee name (END to terminate): ")
     return empname
@@ -11,36 +8,24 @@ def GetDatesWorked():
     #write the code to input fromdate and todate and return the values from the function.  
     #Prompt the user for the dates in the following format: mm/dd/yyyy
     #no validations are needed for this input, we will assume the dates are entered correctly
-    startdate = str(input("Enter start date (mm/dd/yy): "))
-    fromdate = datetime.strptime(startdate, '%m/%d/%y')
-    enddate = str(input("Enter end date (mm/dd/yy): "))
-    todate = datetime.strptime(enddate, '%m/%d/%y')
+    fromdate = str(input("Enter from date: "))
+    todate = str(input("Enter to date: "))
     return fromdate, todate
-    
-
-
 
 def GetHoursWorked():
     hours = float(input('Enter amount of hours worked:  '))
     return hours
-
-
 def GetHourlyRate():
     hourlyrate = float(input ("Enter hourly rate: "))
     return hourlyrate
-
-
 def GetTaxRate():
     taxrate = float(input ("Enter tax rate: "))
     return taxrate
-
-
 def CalcTaxAndNetPay(hours, hourlyrate, taxrate):
     grosspay = hours * hourlyrate
     incometax = grosspay * taxrate
     netpay = grosspay - incometax
     return grosspay, incometax, netpay
-
 
 
 
@@ -53,9 +38,17 @@ def printinfo(EmpDetailList):
     # the following code creates a for loop to read through EmpDetailList and assign values in list to variables
     for EmpList in EmpDetailList:
         fromdate = EmpList[0]
+         #write code to assign values to todate, empname, hours, hourlyrate, and taxrate from EmpLst
+
+        todate = EmpList[1]
+        empname = EmpList[2]
+        hours = EmpList[3]
+        hourlyrate = EmpList[4]
+        taxrate = EmpList[5]
         
-        #write code to assign values to todate, empname, hours, hourlyrate, and taxrate from EmpLst
-        
+
+      
+
 
 
         grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
@@ -103,16 +96,15 @@ if __name__ == "__main__":
         empname = GetEmpName()
         if (empname.upper() == "END"):
             break
-        else:
-            fromdate, todate = GetDatesWorked()
-            hours = GetHoursWorked()
-            hourlyrate = GetHourlyRate()
-            taxrate = GetTaxRate()
+        fromdate, todate = GetDatesWorked()
+        hours = GetHoursWorked()
+        hourlyrate = GetHourlyRate()
+        taxrate = GetTaxRate()
        
 
        
        #write code to insert fromdate, todate, empname, hours, hourlyrate, and taxrate into list EmpDetail
-   
+    
         EmpDetail = [fromdate, todate, empname, hours, hourlyrate, taxrate]
 
         
