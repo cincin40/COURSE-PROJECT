@@ -40,9 +40,8 @@ def printinfo(DetailsPrinted):
     TotNetPay = 0.00
 ###################################################################
     # write the line of code to open Employees.txt file in read mode and assign to EmpFile
-def Empfile():
-    Empfile = open("Employees.txt", "r")
-    return Empfile
+    f = open("Employees.txt")
+    EmpFile = f.read()
 
     while True:
         rundate = input ("Enter start date for report (MM/DD/YYYY) or All for all data in file: ")
@@ -58,7 +57,8 @@ def Empfile():
 
     while True:
         # write the line of code to read a record from EmpFile and assign it to EmpDetail
-        EmpDetail = Empfile.readline()
+        lines = open("Employees.txt")
+        EmpDetail = lines.read()
         if not EmpDetail:
             break
         #write the line of code to remove the carriage return from the end of the record read from the file
@@ -106,7 +106,7 @@ def PrintTotals(EmpTotals):
 
 if __name__ == "__main__":
     # write the line of code to open a file Employees.txt in append mode and assign it to EmpFile
-    EmpFile = open("Employees.txt" "a")
+    EmpFile = open("Employees.txt", "a")
     #EmpDetailList = []
     EmpTotals = {}
     DetailsPrinted = False
