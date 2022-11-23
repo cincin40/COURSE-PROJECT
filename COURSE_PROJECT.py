@@ -1,31 +1,25 @@
 #Cynthia Daniels
-#cIS-261
-#PHASE 3
+#Course Project Phase 3
+#CIS-261
+
 # write the line of code to import the datetime library (Hint: look at week 1 labs)
-
 import datetime
-
 def GetEmpName():
     empname = input("Enter employee name: ")
     return empname
-
 def GetDatesWorked():
     fromdate = input("Enter Start Date (mm/dd/yyyy: ")
     todate = input("Enter End Date (mm/dd/yyyy: ")
     return fromdate, todate
-
 def GetHoursWorked():
     hours = float(input('Enter amount of hours worked:  '))
     return hours
-
 def GetHourlyRate():
     hourlyrate = float(input ("Enter hourly rate: "))
     return hourlyrate
-
 def GetTaxRate():
     taxrate = float(input ("Enter tax rate: "))
     return taxrate
-
 def CalcTaxAndNetPay(hours, hourlyrate, taxrate):
     grosspay = hours * hourlyrate
     incometax = grosspay * taxrate
@@ -40,42 +34,47 @@ def printinfo(DetailsPrinted):
     TotNetPay = 0.00
 ###################################################################
     # write the line of code to open Employees.txt file in read mode and assign to EmpFile
-    f = open("Employees.txt")
-    EmpFile = f.read()
+    EmpFile = open("Employee.txt", "r")
+    
 
     while True:
         rundate = input ("Enter start date for report (MM/DD/YYYY) or All for all data in file: ")
         if (rundate.upper() == "ALL"):
             break
         try:
-            rundate = datetime.strptime(rundate, "%m/%d/%Y")
+            rundate = datetime.datetime.strptime(rundate, "%m/%d/%Y")
             break
         except ValueError:
             print("Invalid date format. Try again.")
             print()
             continue  # skip next if statement and re-start loop
-
     while True:
         # write the line of code to read a record from EmpFile and assign it to EmpDetail
-        lines = open("Employees.txt")
-        EmpDetail = lines.read()
+        EmpFile
+        EmpDetail = EmpFile.readline()
         if not EmpDetail:
             break
         #write the line of code to remove the carriage return from the end of the record read from the file
         EmpDetail = EmpDetail.rstrip()
+        
+
         #write the line of code to split the record read in on the pipe delimiter and assign it to EmpList
-        EmpList = EmpDetail.rsplit("|")
+        EmpList = EmpDetail.split('|')  
+
+
         fromdate = EmpList[0]
         if (str(rundate).upper() != "ALL"):
-            checkdate = datetime.strptime(fromdate, "%m/%d/%Y")
+            checkdate = datetime.datetime.strptime(fromdate, "%m/%d/%Y")
             if (checkdate < rundate):
                 continue        
 ######################################################################
         todate = EmpList[1]
         empname = EmpList[2]
         hours = float(EmpList[3])
-        hourlyrate  = float(EmpList[4])
+        hourlyrate = float(EmpList[4])
         taxrate = float(EmpList[5])
+
+       
         grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
         print(fromdate, todate, empname, f"{hours:,.2f}",  f"{hourlyrate:,.2f}", f"{grosspay:,.2f}",  f"{taxrate:,.1%}",  f"{incometax:,.2f}",  f"{netpay:,.2f}")
         TotEmployees += 1
@@ -106,7 +105,9 @@ def PrintTotals(EmpTotals):
 
 if __name__ == "__main__":
     # write the line of code to open a file Employees.txt in append mode and assign it to EmpFile
-    EmpFile = open("Employees.txt", "a")
+    EmpFile = open('Employee.txt', 'a')
+
+
     #EmpDetailList = []
     EmpTotals = {}
     DetailsPrinted = False
@@ -122,9 +123,13 @@ if __name__ == "__main__":
         # write the line of code that will concatenate fromdate, todate, empname, hours, hourlyrate, and taxrate. Pipe delimit each value and add a carriage return to the end of the line
         # and assign the line to EmpDetail
         EmpDetail = fromdate + '|' + todate + '|' + empname + '|' + str(hours) + '|' + str(hourlyrate) + '|' + str(taxrate) 
+
  
         # write the liie of code that will write EmpDetail to EmpFile
         EmpFile.write(EmpDetail + '')
+        
     # write the line of code to close EmpFile
     EmpFile.close()
+
     printinfo(DetailsPrinted)
+
